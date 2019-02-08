@@ -1,21 +1,11 @@
-git+https://github.com/KarrLab/log.git#egg=log-2016.10.12
-git+git://github.com/KarrLab/wc_utils#egg=wc_utils-0.0.1a5
-git+https://github.com/KarrLab/obj_model.git#egg=obj_model-0.0.5
-git+git://github.com/KarrLab/wc_rules.git#egg=wc_rules-0.0.1
-pgcontents
-
-
+# Jupyter
+jupyter
 jupyter_contrib_nbextensions
-notebook == 4
-ipywidgets
-requests
-ipython == 5
-tornado==4.4.3
-certifi
-click
-cryptography
-mako
-psycopg2
-six
-sqlalchemy
-nose
+# pgcontents
+
+cement # for CLI
+setuptools # for pkg_resources
+
+# Whole-cell modeling tools
+git+https://github.com/KarrLab/bpforms.git#egg=bpforms-0.0.1
+git+https://github.com/KarrLab/wc_rules.git#egg=wc_rules-0.0.1

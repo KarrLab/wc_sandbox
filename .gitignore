@@ -1,0 +1,15 @@
+# compiled python
+*.pyc
+*.egg-info/
+
+# python testing
+__pycache__/
+
+# coverage reports
+.coverage
+htmlcov/
+
+# compiled documentation
+docs/source/
+docs/.doctrees/
+docs/_build/

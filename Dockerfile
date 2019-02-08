@@ -1,10 +1,10 @@
-FROM karrlab/build:0.0.23
-
-RUN rm ~/.gitconfig
+FROM karrlab/wc_env
 
 ADD . /home
 WORKDIR /home
 
-RUN pip3 install -U -r requirements.txt
+RUN pip3.6 install -e . \
+    && jupyter contrib nbextension install \
+    && jupyter nbextensions_configurator enable
 
-CMD ./start_jupyter
+CMD wc-sandbox start --port $PORT --no-browser

@@ -1,0 +1,15 @@
+# description
+README.rst
+
+# version
+include wc_sandbox/VERSION
+
+# license
+include LICENSE
+
+# requirements
+include requirements.txt
+include requirements.optional.txt
+
+# notebooks
+graft wc_sandbox/notebooks
