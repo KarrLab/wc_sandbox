@@ -56,6 +56,7 @@ class InstallPackages(cement.Controller):
         for package_id in package_ids:
             pip._internal.main([
                 'install',
+                '-U',
                 '--process-dependency-links',
                 'git+https://github.com/KarrLab/{0}.git#egg={0}'.format(package_id)])
 
