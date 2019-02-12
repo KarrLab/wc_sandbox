@@ -1,10 +1,14 @@
 # Jupyter
+ipython >= 7.0
+prompt_toolkit >= 2.0.0
+jupyter_console
 ipywidgets
+tornado < 5
 jupyter
 jupyter_contrib_nbextensions
 pgcontents
-tornado < 5
 
 configobj # configuration
 cement # CLI
 setuptools # pkg_resources
+git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils-0.0.3
