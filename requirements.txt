@@ -1,11 +1,10 @@
 # Jupyter
+ipywidgets
 jupyter
 jupyter_contrib_nbextensions
-# pgcontents
+pgcontents
+tornado < 5
 
-cement # for CLI
-setuptools # for pkg_resources
-
-# Whole-cell modeling tools
-git+https://github.com/KarrLab/bpforms.git#egg=bpforms-0.0.1
-git+https://github.com/KarrLab/wc_rules.git#egg=wc_rules-0.0.1
+configobj # configuration
+cement # CLI
+setuptools # pkg_resources

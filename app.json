@@ -1,28 +1,21 @@
 {
-  "name": "jupyter",
-  "buildpacks": [
-    { "url": "https://github.com/pl31/heroku-buildpack-conda.git" }
+  "name": "WC-Sandbox",
+  "keywords": [
+    "whole-cell modeling",
+    "Jupyter notebook",
+    "computational biology",
+    "systems biology",
+    "dynamical modeling",
+    "multiscale modeling",
+    "data integration",
+    "model composition"
   ],
-  "env": {
-    "JUPYTER_NOTEBOOK_PASSWORD": {
-      "description": "IMPORTANT! Set a secure password."
-    },
-    "JUPYTER_NOTEBOOK_ARGS": {
-      "description": "Additional command line arguments.",
-      "required": false,
-      "value": ""
-    },
-    "ENVIRONMENT_YML": {
-      "description": "Alternative environment.yml path.",
-      "required": false,
-      "value": ""
-    },
-    "ADDITIONAL_ENVIRONMENT_YML": {
-      "description": "Additional environment.yml path.",
-      "required": false,
-      "value": ""
-    }
-  },
+  "description": "Interactive Jupyer notebook playground for whole-cell models and whole-cell modeling tools",
+  "website": "https://sandbox.karrlab.org/",
+  "success_url": "/tree",
+  "repository": "https://github.com/KarrLab/wc_sandbox.git",
+  "buildpacks": [],
+  "env": {},
   "addons": [
     "heroku-postgresql:hobby-dev"
   ]
