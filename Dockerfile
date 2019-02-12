@@ -1,6 +1,7 @@
 FROM karrlab/wc_env_dependencies
 
-RUN pip3.6 install -e . \
+RUN git clone https://github.com/KarrLab/wc_sandbox.git \
+    && pip3.6 install -e wc_sandbox \
     && jupyter contrib nbextension install \
     && jupyter nbextensions_configurator enable \
     && wc-sandbox install-packages \
