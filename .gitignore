@@ -13,3 +13,6 @@ htmlcov/
 docs/source/
 docs/.doctrees/
 docs/_build/
+
+# other packages
+packages/

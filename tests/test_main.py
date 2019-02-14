@@ -48,27 +48,40 @@ class CliTestCase(unittest.TestCase):
                 self.assertEqual(captured.stderr.get_text(), '')
 
     def test_install_packages(self):
+        shutil.rmtree(os.path.expanduser('~/.wc/wc_sandbox/packages'))
+
         with __main__.App(argv=['install-packages']) as app:
             with capturer.CaptureOutput(merged=False, relay=False) as captured:
-                app.run()
+                with mock.patch('subprocess.check_call', return_value=None):
+                    app.run()
                 text = captured.stdout.get_text()
         self.assertIn('Installed packages', text)
         self.assertIn('- bpforms', text)
 
+        with __main__.App(argv=['install-packages']) as app:
+            with mock.patch('subprocess.check_call', return_value=None):
+                app.run()
+
     def test_get_notebooks(self):
-        if os.path.isdir(os.path.expanduser('~/.wc/notebooks')):
-            shutil.rmtree(os.path.expanduser('~/.wc/notebooks'))
+        if os.path.isdir(os.path.expanduser('~/.wc/wc_sandbox/notebooks')):
+            shutil.rmtree(os.path.expanduser('~/.wc/wc_sandbox/notebooks'))
+
+        with __main__.App(argv=['install-packages']) as app:
+            with mock.patch('subprocess.check_call', return_value=None):
+                app.run()
 
         with __main__.App(argv=['get-notebooks']) as app:
             with capturer.CaptureOutput(merged=False, relay=False) as captured:
                 app.run()
                 text = captured.stdout.get_text()
-
         self.assertIn('Got notebooks', text)
         self.assertIn('- bpforms', text)
-        self.assertTrue(os.path.isdir(os.path.expanduser('~/.wc/notebooks')))
-        self.assertTrue(os.path.isdir(os.path.expanduser('~/.wc/notebooks/bpforms')))
-        self.assertTrue(os.path.isfile(os.path.expanduser('~/.wc/notebooks/bpforms/Tutorial.ipynb')))
+        self.assertTrue(os.path.isdir(os.path.expanduser('~/.wc/wc_sandbox/notebooks')))
+        self.assertTrue(os.path.isdir(os.path.expanduser('~/.wc/wc_sandbox/notebooks/bpforms')))
+        self.assertTrue(os.path.isfile(os.path.expanduser('~/.wc/wc_sandbox/notebooks/bpforms/Tutorial.ipynb')))
+
+        with __main__.App(argv=['get-notebooks']) as app:
+            app.run()
 
     def test_start_stop(self):
         with __main__.App(argv=['start', '--port', '8888', '--no-browser']) as app:

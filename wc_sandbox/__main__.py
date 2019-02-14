@@ -7,11 +7,13 @@
 """
 
 import cement
+import git
 import importlib
 import os
 import pip._internal
 import shutil
 import subprocess
+import sys
 import time
 import wc_sandbox
 import wc_sandbox.config.core
@@ -53,12 +55,21 @@ class InstallPackages(cement.Controller):
     def _default(self):
         config = wc_sandbox.config.core.get_config()
         package_ids = config['wc_sandbox']['packages'].keys()
+        packages_dir = config['wc_sandbox']['packages_dir']
+
+        if not os.path.isdir(packages_dir):
+            os.makedirs(packages_dir)
         for package_id in package_ids:
-            pip._internal.main([
-                'install',
-                '-U',
-                '--process-dependency-links',
-                'git+https://github.com/KarrLab/{0}.git#egg={0}'.format(package_id)])
+            package_path = os.path.join(packages_dir, package_id)
+            if os.path.isdir(package_path):
+                repo = git.Repo(path=package_path)
+                repo.remotes['origin'].pull()
+            else:
+                git.Repo.clone_from('https://github.com/KarrLab/{}.git'.format(package_id), package_path)
+
+            py_v = '{}.{}'.format(sys.version_info[0], sys.version_info[1])
+            cmd = ['pip' + py_v, 'install', '--process-dependency-links', package_path]
+            subprocess.check_call(cmd)
 
         print('Installed packages:\n- {}'.format('\n- '.join(sorted(package_ids))))
 
@@ -77,19 +88,19 @@ class GetNotebooks(cement.Controller):
     @cement.ex(hide=True)
     def _default(self):
         config = wc_sandbox.config.core.get_config()
-
+        package_ids = config['wc_sandbox']['packages'].keys()
+        packages_dir = config['wc_sandbox']['packages_dir']
         notebooks_dir = config['wc_sandbox']['notebooks_dir']
+
         if os.path.isdir(notebooks_dir):
             shutil.rmtree(notebooks_dir)
         os.makedirs(notebooks_dir)
 
-        package_ids = config['wc_sandbox']['packages'].keys()
         for package_id in package_ids:
-            package = importlib.import_module(package_id)
-            src_dir = os.path.join(os.path.dirname(package.__file__), '..', 'examples')
-
-            dest_dir = os.path.join(notebooks_dir, package_id)
-            shutil.copytree(src_dir, dest_dir)
+            src_dir = os.path.join(packages_dir, package_id, 'examples')
+            if os.path.isdir(src_dir):
+                dest_dir = os.path.join(notebooks_dir, package_id)
+                shutil.copytree(src_dir, dest_dir)
 
         print('Got notebooks for:\n- {}'.format('\n- '.join(sorted(package_ids))))
 

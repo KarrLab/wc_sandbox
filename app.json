@@ -17,6 +17,5 @@
   "buildpacks": [],
   "env": {},
   "addons": [
-    "heroku-postgresql:hobby-dev"
   ]
 }
