@@ -1,0 +1,7 @@
+{
+  "load_extensions": {
+    "tree-filter/index": true,
+    "ipyparallel/main": false,
+    "nbextensions_configurator/tree_tab/main": false
+  }
+}

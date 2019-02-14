@@ -1,0 +1,15 @@
+{
+  "load_extensions": {
+    "varInspector/main": true,
+    "toc2/main": true,
+    "collapsible_headings/main": true,
+    "equation-numbering/main": true,
+    "printview/main": true,
+    "codefolding/main": true,
+    "scratchpad/main": true,
+    "tree-filter/index": true,
+    "nbextensions_configurator/tree_tab/main": false,
+    "nbextensions_configurator/config_menu/main": false,
+    "contrib_nbextensions_help_item/main": false
+  }
+}
