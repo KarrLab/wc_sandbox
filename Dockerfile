@@ -18,9 +18,13 @@ RUN git clone https://github.com/KarrLab/wc_sandbox.git \
     && jupyter nbextension disable contrib_nbextensions_help_item/main \
     \
     && cp -R wc_sandbox/assets/.jupyter/* ~/.jupyter \
-    && cp wc_sandbox/assets/favicon.ico /usr/local/lib/python3.6/site-packages/notebook/static/base/images/favicon.ico
-
-RUN wc-sandbox install-packages \
+    && cp wc_sandbox/assets/favicon.ico /usr/local/lib/python3.6/site-packages/notebook/static/base/images/favicon.ico \
+    \
+    && wc-sandbox install-packages \
     && wc-sandbox get-notebooks
 
-CMD wc-sandbox start --port $PORT --no-browser
+CMD wc-sandbox start \
+    --allow-root \
+    --ip 0.0.0.0 \
+    --port $PORT \
+    --no-browser

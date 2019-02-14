@@ -114,9 +114,12 @@ class StartController(cement.Controller):
         stacked_on = 'base'
         stacked_type = 'nested'
         arguments = [
+            (['--allow-root'], dict(action='store_true', default=False,
+                                    help='Allow the notebook to be run from root user.')),
+            (['--ip'], dict(type=str, default='*', help='IP address the notebook server will listen on.')),
+            (['--port'], dict(type=int, default=None, help='Port the notebook server will listen on.')),
             (['--no-browser'], dict(action='store_true', default=False,
-                                    help='Do not open server in web browser')),
-            (['--port'], dict(type=int, default=None, help='Port')),
+                                    help="Don't open the notebook in a browser after startup.")),
         ]
 
     @cement.ex(hide=True)
@@ -124,6 +127,10 @@ class StartController(cement.Controller):
         args = self.app.pargs
 
         options = []
+        if args.allow_root:
+            options.append('--allow-root')
+        if args.ip:
+            options.append('--ip=' + args.ip)
         if args.port:
             options.append('--port=' + str(args.port))
         if args.no_browser:
@@ -133,7 +140,6 @@ class StartController(cement.Controller):
         notebooks_dir = config['wc_sandbox']['notebooks_dir']
         process = subprocess.Popen(['jupyter', 'notebook',
                                     '--notebook-dir=' + notebooks_dir,
-                                    '--ip=*',
                                     '--NotebookApp.password=',
                                     '--NotebookApp.password_required=False',
                                     '--NotebookApp.allow_password_change=False',

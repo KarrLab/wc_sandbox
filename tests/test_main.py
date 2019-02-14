@@ -84,7 +84,7 @@ class CliTestCase(unittest.TestCase):
             app.run()
 
     def test_start_stop(self):
-        with __main__.App(argv=['start', '--port', '8888', '--no-browser']) as app:
+        with __main__.App(argv=['start', '--allow-root', '--port', '8888', '--no-browser']) as app:
             with capturer.CaptureOutput(merged=False, relay=False) as captured:
                 app.run()
                 text = captured.stdout.get_text()
