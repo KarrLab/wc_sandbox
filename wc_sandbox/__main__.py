@@ -68,7 +68,7 @@ class InstallPackages(cement.Controller):
                 git.Repo.clone_from('https://github.com/KarrLab/{}.git'.format(package_id), package_path)
 
             py_v = '{}.{}'.format(sys.version_info[0], sys.version_info[1])
-            cmd = ['pip' + py_v, 'install', '--process-dependency-links', package_path]
+            cmd = ['pip' + py_v, 'install', '--process-dependency-links', '-e', package_path]
             subprocess.check_call(cmd)
 
         print('Installed packages:\n- {}'.format('\n- '.join(sorted(package_ids))))
@@ -145,26 +145,10 @@ class StartController(cement.Controller):
                                     '--NotebookApp.allow_password_change=False',
                                     '--NotebookApp.token=',
                                     ] + options)
-        time.sleep(5.)
-        print('Server started')
-
-
-class StopController(cement.Controller):
-    """ Stop server """
-
-    class Meta:
-        label = 'stop'
-        description = 'Stop server'
-        stacked_on = 'base'
-        stacked_type = 'nested'
-        arguments = [
-        ]
-
-    @cement.ex(hide=True)
-    def _default(self):
-        process = subprocess.Popen(['jupyter', 'notebook', 'stop'], stdout=subprocess.PIPE)
-        time.sleep(2.)
-        print('Server stopped')
+        while process.poll() is None:
+            time.sleep(0.1)
+        if process.returncode != 0:
+            raise Exception('Error starting jupyter server')
 
 
 class App(cement.App):
@@ -177,7 +161,6 @@ class App(cement.App):
             InstallPackages,
             GetNotebooks,
             StartController,
-            StopController,
         ]
 
 

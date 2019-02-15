@@ -12,6 +12,7 @@ import capturer
 import mock
 import os.path
 import shutil
+import subprocess
 import time
 import unittest
 
@@ -83,15 +84,23 @@ class CliTestCase(unittest.TestCase):
         with __main__.App(argv=['get-notebooks']) as app:
             app.run()
 
-    def test_start_stop(self):
-        with __main__.App(argv=['start', '--allow-root', '--port', '8888', '--no-browser']) as app:
-            with capturer.CaptureOutput(merged=False, relay=False) as captured:
-                app.run()
-                text = captured.stdout.get_text()
-                self.assertIn('Server started', text)
+    def test_start(self):
+        class Popen(object):
+            def __init__(self, returncode):
+                self.returncode = returncode
+                self.counter = 0
 
-        with __main__.App(argv=['stop']) as app:
-            with capturer.CaptureOutput(merged=False, relay=False) as captured:
+            def poll(self):
+                self.counter += 1
+                if self.counter < 3:
+                    return None
+                return 0
+
+        with __main__.App(argv=['start', '--allow-root', '--port', '8888', '--no-browser']) as app:
+            with mock.patch('subprocess.Popen', return_value=Popen(0)):
                 app.run()
-                text = captured.stdout.get_text()
-                self.assertIn('Server stopped', text)
+
+        with __main__.App(argv=['start', '--allow-root', '--port', '8888', '--no-browser']) as app:
+            with self.assertRaises(Exception):
+                with mock.patch('subprocess.Popen', return_value=Popen(1)):
+                    app.run()
