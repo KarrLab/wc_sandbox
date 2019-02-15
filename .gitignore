@@ -16,3 +16,6 @@ docs/_build/
 
 # other packages
 packages/
+
+# licenses
+wc_sandbox/assets/licenses/

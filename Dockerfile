@@ -1,5 +1,6 @@
 FROM karrlab/wc_env_dependencies
 
+# install and configure software and examples
 RUN git clone https://github.com/KarrLab/wc_sandbox.git \
     && cd /root/wc_sandbox \
     && pip3.6 install --process-dependency-links -r requirements.txt \
@@ -23,8 +24,17 @@ RUN git clone https://github.com/KarrLab/wc_sandbox.git \
     && wc-sandbox install-packages \
     && wc-sandbox get-notebooks
 
-CMD wc-sandbox start \
-    --allow-root \
-    --ip 0.0.0.0 \
-    --port $PORT \
-    --no-browser
+# setup entry point
+CMD jupyter notebook \
+        --allow-root \
+        --ip=0.0.0.0 \
+        --port $PORT \
+        --no-browser \
+        --notebook-dir=/root/.wc/wc_sandbox/notebooks \
+        --NotebookApp.password= \
+        --NotebookApp.password_required=False \
+        --NotebookApp.allow_password_change=False \
+        --NotebookApp.token=
+
+# copy licenses
+COPY wc_sandbox/assets/licenses/chemaxon.cxl /root/.chemaxon/license.cxl
