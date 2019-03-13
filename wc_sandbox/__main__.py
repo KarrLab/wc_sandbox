@@ -68,7 +68,11 @@ class InstallPackages(cement.Controller):
                 git.Repo.clone_from('https://github.com/KarrLab/{}.git'.format(package_id), package_path)
 
             py_v = '{}.{}'.format(sys.version_info[0], sys.version_info[1])
-            cmd = ['pip' + py_v, 'install', '--process-dependency-links', '-e', package_path]
+            
+            cmd = ['pip' + py_v, 'install', '-r', os.path.join(package_path, '.circleci', 'requirements.txt')]
+            subprocess.check_call(cmd)
+
+            cmd = ['pip' + py_v, 'install', '-e', package_path]
             subprocess.check_call(cmd)
 
         print('Installed packages:\n- {}'.format('\n- '.join(sorted(package_ids))))

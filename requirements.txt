@@ -11,4 +11,4 @@ configobj # configuration
 cement # CLI
 gitpython
 setuptools # pkg_resources
-git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils-0.0.3 >= 0.0.3
+wc_utils >= 0.0.3

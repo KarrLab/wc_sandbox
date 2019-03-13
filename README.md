@@ -27,7 +27,9 @@ WC-Sandbox is a collection of Jupyter notebooks for learning about whole-cell mo
 
     * Install the latest revision from GitHub
       ```
-      pip install git+git://github.com/KarrLab/wc_sandbox#egg=wc_sandbox
+      pip install git+https://github.com/KarrLab/log.git#egg=log
+      pip install git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils
+      pip install git+https://github.com/KarrLab/wc_sandbox.git#egg=wc_sandbox
       ```
 
 ## Examples, tutorial, and documentation
