@@ -3,7 +3,7 @@ FROM karrlab/wc_env_dependencies
 # install and configure software and examples
 RUN git clone https://github.com/KarrLab/wc_sandbox.git \
     && cd /root/wc_sandbox \
-    && pip3.6 install -r ./circleci/requirements.txt \
+    && pip3.6 install -r .circleci/requirements.txt \
     && pip3.6 install -e . \
     \
     && jupyter contrib nbextension install \
