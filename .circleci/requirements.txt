@@ -1,3 +1,6 @@
+# specific versions of dependencies
+tornado < 5
+
 # third party forks
 git+https://github.com/KarrLab/log.git#egg=log
 
