@@ -30,7 +30,8 @@ class BaseController(cement.Controller):
 
     class Meta:
         label = 'base'
-        description = "wc-sandbox"
+        description = "Jupyter server for interactive whole-cell modeling tutorials"
+        help = "Jupyter server for interactive whole-cell modeling tutorials"
         arguments = [
             (['-v', '--version'], dict(action='version', version=wc_sandbox.__version__)),
         ]
@@ -46,6 +47,7 @@ class InstallPackages(cement.Controller):
     class Meta:
         label = 'install-packages'
         description = 'Install packages'
+        help = 'Install packages'
         stacked_on = 'base'
         stacked_type = 'nested'
         arguments = [
@@ -84,6 +86,7 @@ class GetNotebooks(cement.Controller):
     class Meta:
         label = 'get-notebooks'
         description = 'Get notebooks'
+        help = 'Get notebooks'
         stacked_on = 'base'
         stacked_type = 'nested'
         arguments = [
@@ -115,6 +118,7 @@ class StartController(cement.Controller):
     class Meta:
         label = 'start'
         description = 'Start server'
+        help = 'Start server'
         stacked_on = 'base'
         stacked_type = 'nested'
         arguments = [
