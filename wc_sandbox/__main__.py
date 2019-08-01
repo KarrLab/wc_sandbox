@@ -19,12 +19,6 @@ import wc_sandbox
 import wc_sandbox.config.core
 
 
-PACKAGES = (
-    'bpforms',
-    'wc_rules',
-)
-
-
 class BaseController(cement.Controller):
     """ Base controller for command line application """
 
