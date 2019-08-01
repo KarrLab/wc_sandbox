@@ -41,4 +41,4 @@ The package is released under the [MIT license](LICENSE).
 This package was developed by the [Karr Lab](https://www.karrlab.org) at the Icahn School of Medicine at Mount Sinai in New York, USA.
 
 ## Questions and comments
-Please contact the [Karr Lab](https://www.karrlab.org) with any questions or comments.
+Please contact the [Karr Lab](mailto:info@karrlab.org) with any questions or comments.
