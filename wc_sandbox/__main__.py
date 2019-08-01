@@ -89,7 +89,7 @@ class GetNotebooks(cement.Controller):
     @cement.ex(hide=True)
     def _default(self):
         config = wc_sandbox.config.core.get_config()
-        package_ids = config['wc_sandbox']['packages'].keys()
+        packages = config['wc_sandbox']['packages']
         packages_dir = config['wc_sandbox']['packages_dir']
         notebooks_dir = config['wc_sandbox']['notebooks_dir']
 
@@ -97,13 +97,19 @@ class GetNotebooks(cement.Controller):
             shutil.rmtree(notebooks_dir)
         os.makedirs(notebooks_dir)
 
-        for package_id in package_ids:
-            src_dir = os.path.join(packages_dir, package_id, 'examples')
-            if os.path.isdir(src_dir):
+        has_notebooks = []
+        for package_id, package in packages.items():
+            if len(package) > 0:
                 dest_dir = os.path.join(notebooks_dir, package_id)
-                shutil.copytree(src_dir, dest_dir)
+                os.mkdir(dest_dir)
+                has_notebooks.append(package_id)
 
-        print('Got notebooks for:\n- {}'.format('\n- '.join(sorted(package_ids))))
+            for src_filename, dest_filename in package.items():
+                full_src_filename = os.path.join(packages_dir, package_id, src_filename)
+                full_dest_filename = os.path.join(notebooks_dir, package_id, dest_filename['dest'])
+                shutil.copyfile(full_src_filename, full_dest_filename)
+
+        print('Got notebooks for:\n- {}'.format('\n- '.join(sorted(has_notebooks))))
 
 
 class StartController(cement.Controller):
