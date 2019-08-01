@@ -5,10 +5,10 @@ mkdir -p wc_sandbox/assets/licenses/
 cp ~/.wc/third_party/chemaxon.license.cxl wc_sandbox/assets/licenses/chemaxon.cxl
 
 # build image
-docker rmi karrlab/wc_sandbox:0.0.50
+docker rmi karrlab/wc_sandbox:0.0.51
 docker rmi karrlab/wc_sandbox:latest
 docker build \
-    --tag karrlab/wc_sandbox:0.0.50 \
+    --tag karrlab/wc_sandbox:0.0.51 \
     --tag karrlab/wc_sandbox:latest \
     .
 
