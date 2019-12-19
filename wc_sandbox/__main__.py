@@ -10,7 +10,6 @@ import cement
 import git
 import importlib
 import os
-import pip._internal
 import shutil
 import subprocess
 import sys
