@@ -59,9 +59,7 @@ author = u'Karr Lab'
 # built documents.
 #
 # The short X.Y version.
-filename = os.path.join(os.path.dirname(__file__), '..', 'wc_sandbox', 'VERSION')
-with open(filename, 'r') as file:
-    version = file.read()
+from wc_sandbox._version import __version__ as version
 # The full version, including alpha/beta/rc tags.
 release = version
 
