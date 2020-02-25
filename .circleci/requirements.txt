@@ -1,5 +1,6 @@
 # specific versions of dependencies
-tornado < 5
+prompt_toolkit >= 2, < 2.1.0
+tornado >= 5
 
 # Karr Lab
 git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils

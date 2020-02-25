@@ -1,9 +1,9 @@
 # Jupyter
 ipython >= 7.2
-prompt_toolkit >= 2
+prompt_toolkit >= 2, < 2.1.0
 ipyparallel
 ipywidgets
-tornado < 5
+tornado >= 5
 jupyter
 jupyter_contrib_nbextensions
 
