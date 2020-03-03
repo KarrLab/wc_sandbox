@@ -18,6 +18,9 @@ docker run --env PORT=8888 --expose 8888 -p 8888:8888 karrlab/wc_sandbox:latest
 
 # check everything work by visiting http://localhost:8888/tree
 
+# login to heroku
+heroku container:login
+
 # push image to heroku
 heroku container:push web -a wc--sandbox
 
