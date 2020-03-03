@@ -79,7 +79,7 @@ class CliTestCase(unittest.TestCase):
         self.assertIn('- bpforms', text)
         self.assertTrue(os.path.isdir(os.path.expanduser('~/.wc/wc_sandbox/notebooks')))
         self.assertTrue(os.path.isdir(os.path.expanduser('~/.wc/wc_sandbox/notebooks/bpforms')))
-        self.assertTrue(os.path.isfile(os.path.expanduser('~/.wc/wc_sandbox/notebooks/bpforms/Tutorial.ipynb')))
+        self.assertTrue(os.path.isfile(os.path.expanduser('~/.wc/wc_sandbox/notebooks/bpforms/1. Introductory tutorial.ipynb')))
 
         with __main__.App(argv=['get-notebooks']) as app:
             app.run()
