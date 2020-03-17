@@ -7,8 +7,9 @@ cp ~/.wc/third_party/chemaxon.license.cxl wc_sandbox/assets/licenses/chemaxon.cx
 # build image
 docker rmi karrlab/wc_sandbox:0.0.51
 docker rmi karrlab/wc_sandbox:latest
+docker rmi registry.heroku.com/wc--sandbox/web
 docker build \
-    --tag karrlab/wc_sandbox:0.0.51 \
+    --tag karrlab/wc_sandbox:0.0.51a \
     --tag karrlab/wc_sandbox:latest \
     .
 
