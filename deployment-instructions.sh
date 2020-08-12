@@ -5,11 +5,11 @@ mkdir -p wc_sandbox/assets/licenses/
 cp ~/.wc/third_party/chemaxon.license.cxl wc_sandbox/assets/licenses/chemaxon.cxl
 
 # build image
-docker rmi karrlab/wc_sandbox:0.0.52a
+docker rmi karrlab/wc_sandbox:0.0.52b
 docker rmi karrlab/wc_sandbox:latest
 docker rmi registry.heroku.com/wc--sandbox/web
 docker build \
-    --tag karrlab/wc_sandbox:0.0.52b \
+    --tag karrlab/wc_sandbox:0.0.52c \
     --tag karrlab/wc_sandbox:latest \
     .
 
