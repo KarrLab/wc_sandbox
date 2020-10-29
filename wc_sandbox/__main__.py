@@ -106,6 +106,9 @@ class GetNotebooks(cement.Controller):
             for src_filename, dest_filename in package.items():
                 full_src_filename = os.path.join(packages_dir, package_id, src_filename)
                 full_dest_filename = os.path.join(notebooks_dir, package_id, dest_filename['dest'])
+                full_dest_dir = os.path.dirname(full_dest_filename)
+                if not os.path.isdir(full_dest_dir):
+                    os.makedirs(full_dest_dir)
                 shutil.copyfile(full_src_filename, full_dest_filename)
 
         print('Got notebooks for:\n- {}'.format('\n- '.join(sorted(has_notebooks))))
